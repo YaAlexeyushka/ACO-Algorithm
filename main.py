@@ -19,6 +19,6 @@ g.add_edge('G', 'C', 3)
 g.add_edge('G', 'D', 5)
 g.add_edge('G', 'F', 4)
         
-result = g.calculate_ACO(iterat=100, ants=1, a=2, b=3, Q=5, p=0.5)
+result = g.calculate_ACO(iterat=100, ants=10, a=2, b=3, Q=5, p=0.5)
 print(f'найденный кратчайший путь: {result}')
 

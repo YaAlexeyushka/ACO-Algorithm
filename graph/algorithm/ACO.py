@@ -107,14 +107,15 @@ class ACO:
             for ant in range(self.ants):
                 first_vertex = self.choose_first_vertex(vertices)
                 vertex = first_vertex  
-                flag = 1
+                is_way_proper = True
                 way = f'{first_vertex}'  
                 temp_graph = copy.deepcopy(graph)
+                self.delete_vertex(first_vertex, temp_graph)
                 
-                for _ in range(len(vertices)):
+                for v in range(len(vertices)-1):
                     accessible_vertices_attraction = self.calculate_accessible_vertices_attraction(vertex, temp_graph, temp_pheromone_graph)
                     if not accessible_vertices_attraction:
-                        flag = 0
+                        is_way_proper = False
                         break
                     new_vertex = self.choose_vertex(accessible_vertices_attraction)
                     pheromone_change = self.calculate_pheromone_change(vertex, new_vertex, pheromone_graph)
@@ -122,8 +123,18 @@ class ACO:
                     self.delete_vertex(new_vertex, temp_graph)
                     vertex = new_vertex
                     way += f'{new_vertex}'  
+
+                    # Возврат к первой вершине
+                    is_last_vertex = v == len(vertices)-2
+                    if (is_last_vertex):
+                        pheromone_change = self.calculate_pheromone_change(new_vertex, first_vertex, pheromone_graph)
+                        if pheromone_change:
+                            way += f'{first_vertex}'  
+                        else:
+                            is_way_proper = False
+                            break
                 
-                if way[-1] == first_vertex and flag == 1:
+                if is_way_proper:
                     ways_weights.append( graph.calculate_way_weight(way)  )
             
             if (len(ways_weights) != 0):
