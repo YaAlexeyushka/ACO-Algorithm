@@ -1,6 +1,7 @@
 import random
 import copy
 import matplotlib.pyplot as plt
+from collections import Counter
 
 
 class ACO:
@@ -96,6 +97,7 @@ class ACO:
     
                 
     def calc(self, graph):
+        best_way = None
         ways = []
         ways_weights = []
         best_ways_weights = []
@@ -136,7 +138,10 @@ class ACO:
                             break
                 
                 if is_way_proper:
-                    ways_weights.append( graph.calculate_way_weight(way)  )
+                    vertex_weight = graph.calculate_way_weight(way)
+                    ways_weights.append( vertex_weight  )
+                    if vertex_weight <= min(ways_weights):
+                        best_way = way
             
             if (len(ways_weights) != 0):
                 best_ways_weights.append( min(ways_weights ))
@@ -148,7 +153,7 @@ class ACO:
             plt.ylabel('Вес лучшего пути')
             plt.show()
         
-        return min(best_ways_weights)
+        return min(best_ways_weights), best_way
 
 
 
