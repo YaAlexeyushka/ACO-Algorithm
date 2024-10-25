@@ -46,8 +46,8 @@ class Graph:
             weight += self.get_weight(way[i], way[i+1])
         return weight
     
-    def calculate_ACO(self, iterat=100, ants=10, a=1, b=1, Q=4, p=1):
-        alg = ACO(iterat, ants, a, b, Q, p)
+    def calculate_ACO(self, iterat=100, ants=10, a=1, b=1, Q=4, p=1, show=True):
+        alg = ACO(iterat, ants, a, b, Q, p, show)
         return alg.calc(self)
     
 

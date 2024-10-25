@@ -4,13 +4,14 @@ import matplotlib.pyplot as plt
 
 
 class ACO:
-    def __init__(self, _iterat=100,  _ants=10, _A=1, _B=1, _Q=4, _p=1):
+    def __init__(self, _iterat=100,  _ants=10, _A=1, _B=1, _Q=4, _p=1, _show=True):
         self.iterat = _iterat
         self.ants = _ants
         self.A = _A
         self.B = _B
         self.Q = _Q 
         self.p = _p
+        self.show = _show
         
         
     def get_pheromone_graph(self, graph, vertices):
@@ -140,11 +141,12 @@ class ACO:
             if (len(ways_weights) != 0):
                 best_ways_weights.append( min(ways_weights ))
         
-        plt.grid()
-        plt.plot(range(1, len(best_ways_weights) + 1), best_ways_weights)
-        plt.xlabel('Итерация')
-        plt.ylabel('Вес лучшего пути')
-        plt.show()
+        if self.show:
+            plt.grid()
+            plt.plot(range(1, len(best_ways_weights) + 1), best_ways_weights)
+            plt.xlabel('Итерация')
+            plt.ylabel('Вес лучшего пути')
+            plt.show()
         
         return min(best_ways_weights)
 
