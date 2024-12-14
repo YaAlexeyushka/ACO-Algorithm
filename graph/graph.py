@@ -38,8 +38,7 @@ class Graph:
             if accessible_vertex[0] == vertex2:
                 weight = accessible_vertex[1]
                 return weight       
-            
-            
+                
     def calculate_way_weight(self, way):
         weight = 0
         for i in range(len(way)-1):
