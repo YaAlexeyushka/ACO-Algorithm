@@ -32,7 +32,6 @@ class ACO:
             for i in range(len(way)-1):
                 pheromone_change = self.calculate_pheromone_change(way[i], way[i+1], graph)
                 graph.graph[way[i]].neighbors[way[i+1]][1] += pheromone_change        
-
         
     def calculate_n(self, graph, vertex1, vertex2):
         weight =  graph.get_weight(vertex1, vertex2)

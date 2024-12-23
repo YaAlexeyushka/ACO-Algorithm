@@ -2,10 +2,6 @@ class Vertex:
     def __init__(self, _name):
         self.name = _name 
         self.neighbors = {}
-        
-    def __eq__(self, _v):
-        return self.name == _v
-    
     
     def add_neighbor(self, _v, _weight):
         self.neighbors[_v] = [_weight]
