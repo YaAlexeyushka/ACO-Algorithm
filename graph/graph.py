@@ -40,51 +40,7 @@ class Graph:
                 weight += edge_weight
         return weight
 
-    def calculate_ACO(self, iterat=100, ants=None, Q=4, p=1, first_vertex=None, show=True, log=True):
-        alg = ACO(iterat, ants, Q, p, first_vertex, show, log)
-        return alg.calc(self)
-
-    def is_hamiltonian_cycle(self, path, pos, vertices):
-        if pos == len(vertices):  
-            return self.get_weight(path[pos - 1], path[0]) is not None
-
-        for vertex in vertices:
-            if vertex not in path and self.get_weight(path[pos - 1], vertex) is not None:
-                path[pos] = vertex
-                if self.is_hamiltonian_cycle(path, pos + 1, vertices):
-                    return True
-                path[pos] = None
-
-        return False
-
-    def has_hamiltonian_cycle(self):
-        vertices = self.get_vertices()
-        path = [None] * len(vertices)
-        path[0] = vertices[0]
-        return self.is_hamiltonian_cycle(path, 1, vertices)
-
-    def make_hamiltonian(self):
-        added_edges_amount = 0
-        vertices = self.get_vertices()
-        vertices_deg = {vertex: self.get_accessible_vertices(vertex) for vertex in vertices}
-        vertices_deg = sorted(vertices_deg.items(), key=lambda item: len(item[1]))
-
-        proper_deg = (len(vertices) + 1) // 4
-        while True:
-            for i in range(len(vertices_deg) - 1):
-                if vertices_deg[i + 1][0] not in vertices_deg[0][1]:
-                    self.add_edge(vertices_deg[0][0], vertices_deg[i + 1][0], 5)
-                    added_edges_amount += 1
-                    vertices_deg[0][1].append(vertices_deg[i + 1][0])
-                    if vertices_deg[0][0] not in vertices_deg[i + 1][1]:
-                        self.add_edge(vertices_deg[i + 1][0], vertices_deg[0][0], 5)
-                        added_edges_amount += 1
-                        vertices_deg[i + 1][1].append(vertices_deg[0][0])
-                    break
-            vertices_deg = sorted(vertices_deg, key=lambda item: len(item[1]))
-            if len(vertices_deg[0][1]) >= proper_deg:
-                return added_edges_amount
-
+    
     # def extend_way(self, way, vertices, ways_edges, added_edges_amount, edge_weight, vertices_deg):
     #     while True:
     #         for vertex in vertices:
