@@ -10,7 +10,7 @@ g = Graph()
 
 graph_name = "graph.txt"
 graph1000_name = "1000.txt"
-with open(graph_name) as f:
+with open(graph1000_name) as f:
     i = 0
     for edge in f:
         vertex1, vertex2, weight = edge.split()
@@ -38,27 +38,27 @@ else:
         
 if if_has_hamiltonian_cycle:
     ants = []
-    for i in range(5):
+    for i in range(1):
         ants.append(Ant(1.2, 0.6))
         
-    for i in range(2):
+    for i in range(0):
         ants.append(Ant(1.3, 0.7))
         
     print("запуск муравьев")
     
-    iterat = 3000
-    Q = 1
-    p = 0.1
-    first_vertex = None 
-    show = True 
-    log = True
-    
-    # iterat = 20
+    # iterat = 3000
     # Q = 1
-    # p = 0
-    # first_vertex = 0
-    # show = False
-    # log = False
+    # p = 0.1
+    # first_vertex = None 
+    # show = True 
+    # log = True
+    
+    iterat = 200
+    Q = 1
+    p = 0
+    first_vertex = 0
+    show = True
+    log = False
     
     start_time = time.time()
     alg = ACO(iterat, ants, Q, p, first_vertex, show, log)
